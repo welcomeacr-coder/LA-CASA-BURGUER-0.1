@@ -1,0 +1,2923 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LA CASA BURGUER | Cardápio Online</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&family=Pacifico&family=Bebas+Neue&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #223e3e;
+            --secondary: #656c6c;
+            --dark: #2E2E2E;
+            --light: #f9f9f9;
+            --success: #4CAF50;
+            --shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            --border-radius: 12px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: var(--dark);
+            background-color: #fff;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header e Navegação */
+        header {
+            background-color: #fff;
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            position: relative;
+        }
+
+        /* Logo com imagem */
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            text-decoration: none;
+        }
+
+        .logo-image {
+            width: 70px;
+            height: 70px;
+            border-radius: 10px;
+            object-fit: cover;
+            flex-shrink: 0;
+            display: block;
+        }
+
+        .logo-image[src=""] {
+            background: linear-gradient(135deg, var(--primary) 0%, #2c5a59 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 12px;
+            font-weight: bold;
+            text-align: center;
+            padding: 5px;
+        }
+
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .logo h1 {
+            font-family: 'Bebas Neue', cursive;
+            font-size: 32px;
+            font-weight: 900;
+            color: var(--dark);
+            line-height: 1;
+            letter-spacing: 1.5px;
+        }
+
+        .logo span {
+            color: var(--primary);
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+        }
+
+        .logo-subtitle {
+            font-size: 10px;
+            color: #666;
+            margin-top: 2px;
+            letter-spacing: 0.5px;
+            font-weight: 600;
+        }
+
+        /* Menu de navegação */
+        .nav-menu {
+            display: flex;
+            gap: 25px;
+            align-items: center;
+        }
+
+        .nav-link {
+            color: var(--dark);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 16px;
+            transition: color 0.3s ease;
+            padding: 5px 0;
+            position: relative;
+        }
+
+        .nav-link:hover {
+            color: var(--primary);
+        }
+
+        .nav-link.active {
+            color: var(--primary);
+        }
+
+        .nav-link.active::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: var(--primary);
+        }
+
+        /* Botão menu mobile */
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 24px;
+            color: var(--dark);
+            cursor: pointer;
+            padding: 5px;
+            z-index: 1001;
+        }
+
+        .cart-icon {
+            position: relative;
+            font-size: 24px;
+            color: var(--dark);
+            cursor: pointer;
+            margin-left: 20px;
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background-color: var(--primary);
+            color: white;
+            font-size: 12px;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--primary) 0%, #ff8c00 100%);
+            color: white;
+            padding: 60px 20px;
+        }
+
+        .hero-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 40px;
+        }
+
+        .hero-text {
+            text-align: center;
+            max-width: 600px;
+        }
+
+        .hero h2 {
+            font-size: 2rem;
+            margin-bottom: 15px;
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero p {
+            font-size: 1rem;
+            max-width: 700px;
+            margin: 0 auto 30px;
+            opacity: 0.95;
+        }
+
+        .hero-image {
+            width: 100%;
+            max-width: 500px;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+            border: 5px solid white;
+            background-color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hero-image img {
+            width: 100%;
+            height: auto;
+            object-fit: contain;
+            display: block;
+            padding: 15px;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background-color: var(--dark);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: 2px solid var(--dark);
+            cursor: pointer;
+        }
+
+        .cta-button:hover {
+            background-color: transparent;
+            color: var(--dark);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Seção Cardápio */
+        .section-title {
+            text-align: center;
+            margin: 50px 0 30px;
+        }
+
+        .section-title h2 {
+            font-size: 2rem;
+            color: var(--dark);
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title h2:after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background-color: var(--primary);
+            border-radius: 2px;
+        }
+
+        /* Filtros de Categoria */
+        .category-filter {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 30px;
+        }
+
+        .category-btn {
+            padding: 8px 20px;
+            background-color: #f1f1f1;
+            border: none;
+            border-radius: 50px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .category-btn i {
+            font-size: 16px;
+        }
+
+        .category-btn.active,
+        .category-btn:hover {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        /* Grid do Cardápio */
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+            margin-bottom: 50px;
+        }
+
+        .menu-item {
+            background-color: white;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .menu-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .item-image {
+            width: 100%;
+            height: 180px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .item-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .menu-item:hover .item-image img {
+            transform: scale(1.05);
+        }
+
+        .item-info {
+            padding: 15px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .item-info h3 {
+            font-size: 1.2rem;
+            margin-bottom: 8px;
+            text-align: center;
+        }
+
+        .item-info p {
+            color: #666;
+            font-size: 0.85rem;
+            margin-bottom: 12px;
+            text-align: center;
+            flex-grow: 1;
+        }
+
+        .item-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: auto;
+            gap: 10px;
+        }
+
+        .price {
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: var(--primary);
+            flex: 1;
+        }
+
+        .add-to-cart {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            font-size: 0.9rem;
+            white-space: nowrap;
+        }
+
+        .add-to-cart:hover {
+            background-color: #2c5a59;
+            transform: translateY(-2px);
+        }
+
+        /* Sidebar do Carrinho - CORRIGIDO */
+        .cart-sidebar {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 100%;
+            height: 100%;
+            background-color: white;
+            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+            z-index: 1100;
+            transition: right 0.4s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .cart-sidebar.active {
+            right: 0;
+        }
+
+        .cart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            border-bottom: 1px solid #eee;
+            flex-shrink: 0;
+        }
+
+        .cart-header h3 {
+            font-size: 1.3rem;
+            color: var(--dark);
+        }
+
+        .close-cart {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: #666;
+        }
+
+        .cart-items {
+            flex: 1;
+            overflow-y: auto;
+            padding: 20px;
+            position: relative;
+        }
+
+        .cart-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .cart-item-image {
+            width: 50px;
+            height: 50px;
+            border-radius: 8px;
+            overflow: hidden;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+
+        .cart-item-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .cart-item-info {
+            flex: 1;
+        }
+
+        .cart-item-info h4 {
+            font-size: 1rem;
+            margin-bottom: 5px;
+        }
+
+        .cart-item-info p {
+            color: var(--primary);
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .cart-item-controls {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .quantity-btn {
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            border: none;
+            background-color: #f0f0f0;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+        }
+
+        .item-quantity {
+            font-weight: 600;
+            min-width: 20px;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+
+        .remove-item {
+            background: none;
+            border: none;
+            color: #ff4444;
+            cursor: pointer;
+            font-size: 16px;
+            margin-left: 5px;
+        }
+
+        .cart-footer {
+            padding: 15px;
+            border-top: 1px solid #eee;
+            background-color: white;
+            flex-shrink: 0;
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .cart-total {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 12px;
+            font-size: 1.1rem;
+            font-weight: 700;
+        }
+
+        .cart-total span:last-child {
+            color: var(--primary);
+        }
+
+        .whatsapp-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            width: 100%;
+            padding: 12px;
+            background-color: #25D366;
+            color: white;
+            border: none;
+            border-radius: var(--border-radius);
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .whatsapp-btn:hover {
+            background-color: #1da851;
+        }
+
+        /* Overlay do Carrinho */
+        .cart-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1050;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease;
+        }
+
+        .cart-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* Modal de Checkout */
+        .checkout-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1200;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease;
+            padding: 20px;
+        }
+
+        .checkout-modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .checkout-form {
+            background-color: white;
+            border-radius: var(--border-radius);
+            width: 100%;
+            max-width: 500px;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: var(--shadow);
+            transform: scale(1);
+            opacity: 1;
+        }
+
+        .checkout-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .checkout-header h3 {
+            font-size: 1.3rem;
+            color: var(--dark);
+        }
+
+        .close-checkout {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: #666;
+        }
+
+        .checkout-body {
+            padding: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--dark);
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.95rem;
+            transition: border-color 0.3s ease;
+            background-color: white;
+            color: var(--dark);
+            display: block;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(34, 62, 62, 0.1);
+        }
+
+        .form-group textarea {
+            min-height: 80px;
+            resize: vertical;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .form-row .form-group {
+            flex: 1;
+            margin-bottom: 0;
+        }
+
+        .payment-options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .payment-option {
+            flex: 1;
+            min-width: 120px;
+        }
+
+        .payment-option input {
+            display: none;
+        }
+
+        .payment-option label {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 15px 10px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .payment-option label i {
+            font-size: 1.5rem;
+            margin-bottom: 8px;
+            color: #666;
+        }
+
+        .payment-option input:checked + label {
+            border-color: var(--primary);
+            background-color: rgba(34, 62, 62, 0.05);
+        }
+
+        .payment-option input:checked + label i {
+            color: var(--primary);
+        }
+
+        .checkout-footer {
+            padding: 20px;
+            border-top: 1px solid #eee;
+        }
+
+        .send-whatsapp-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            width: 100%;
+            padding: 15px;
+            background-color: #25D366;
+            color: white;
+            border: none;
+            border-radius: var(--border-radius);
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .send-whatsapp-btn:hover {
+            background-color: #1da851;
+        }
+
+        /* Modal de Chave PIX */
+        .pix-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1300;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease;
+            padding: 20px;
+        }
+
+        .pix-modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .pix-content {
+            background-color: white;
+            border-radius: var(--border-radius);
+            width: 100%;
+            max-width: 500px;
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            max-height: 90vh;
+        }
+
+        .pix-header {
+            background: linear-gradient(135deg, var(--primary) 0%, #32CD32 100%);
+            color: white;
+            padding: 20px;
+            text-align: center;
+            flex-shrink: 0;
+        }
+
+        .pix-header h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+
+        .pix-header p {
+            opacity: 0.9;
+            font-size: 0.9rem;
+        }
+
+        .pix-body {
+            padding: 25px;
+            text-align: center;
+            flex: 1;
+            overflow-y: auto;
+        }
+
+        .pix-key-container {
+            background-color: #f9f9f9;
+            border: 2px dashed #32CD32;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            position: relative;
+        }
+
+        .pix-key-label {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .pix-key-value {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--primary);
+            word-break: break-all;
+            padding: 10px;
+            background-color: white;
+            border-radius: 5px;
+            border: 1px solid #eee;
+            margin: 10px 0;
+        }
+
+        .copy-pix-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 25px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            margin-bottom: 10px;
+        }
+
+        .copy-pix-btn:hover {
+            background-color: #2c5a59;
+            transform: translateY(-2px);
+        }
+
+        .copy-pix-btn.copied {
+            background-color: var(--success);
+        }
+
+        .pix-footer {
+            padding: 20px;
+            border-top: 1px solid #eee;
+            text-align: center;
+            flex-shrink: 0;
+        }
+
+        .pix-footer p {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+
+        .pix-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .confirm-pix-btn {
+            background-color: #25D366;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 25px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        .confirm-pix-btn:hover {
+            background-color: #1da851;
+        }
+
+        .back-to-checkout-btn {
+            background-color: #f0f0f0;
+            color: var(--dark);
+            border: none;
+            padding: 12px 20px;
+            border-radius: 25px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        .back-to-checkout-btn:hover {
+            background-color: #e0e0e0;
+        }
+
+        .pix-icon {
+            color: #32CD32;
+            font-size: 48px;
+            margin-bottom: 15px;
+        }
+
+        .payment-warning {
+            background-color: #fff8e1;
+            border-left: 4px solid #ffc107;
+            padding: 12px;
+            text-align: left;
+            margin: 20px 0;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 40px 0 20px;
+            margin-top: 50px;
+        }
+
+        .footer-top {
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 20px 0;
+            margin-bottom: 30px;
+        }
+
+        /* Seção de Localização da Lanchonete */
+        .location-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .location-title {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: white;
+        }
+
+        .location-photo-container {
+            width: 100%;
+            max-width: 400px;
+            margin: 0 auto 20px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .location-photo-container:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .location-photo {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .location-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .location-photo-container:hover .location-overlay {
+            opacity: 1;
+        }
+
+        .location-icon {
+            color: white;
+            font-size: 40px;
+            margin-bottom: 10px;
+        }
+
+        .location-text {
+            color: white;
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        .location-address {
+            font-size: 1rem;
+            margin-top: 10px;
+            opacity: 0.9;
+            max-width: 600px;
+        }
+
+        .open-map-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background-color: var(--primary);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 25px;
+            font-weight: 600;
+            text-decoration: none;
+            margin-top: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .open-map-btn:hover {
+            background-color: #2c5a59;
+            transform: translateY(-2px);
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .footer-column h3 {
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            color: white;
+        }
+
+        .footer-column p {
+            opacity: 0.8;
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .social-icons a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 35px;
+            height: 35px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+
+        .social-icons a:hover {
+            background-color: var(--primary);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            opacity: 0.7;
+            font-size: 0.85rem;
+        }
+
+        /* Botão Flutuante do WhatsApp */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 60px;
+            height: 60px;
+            background-color: #25D366;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            z-index: 1000;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .whatsapp-float:hover {
+            background-color: #1da851;
+            transform: scale(1.1);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        .whatsapp-float::after {
+            content: 'Pedir pelo WhatsApp';
+            position: absolute;
+            right: 70px;
+            white-space: nowrap;
+            background-color: #25D366;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+        }
+
+        .whatsapp-float:hover::after {
+            opacity: 1;
+        }
+
+        /* Responsividade Desktop */
+        @media (min-width: 769px) {
+            .hero {
+                padding: 80px 20px;
+            }
+            
+            .hero-content {
+                flex-direction: row;
+                justify-content: space-between;
+                gap: 60px;
+            }
+            
+            .hero-text {
+                text-align: left;
+                flex: 1;
+            }
+            
+            .hero h2 {
+                font-size: 2.8rem;
+            }
+            
+            .hero p {
+                font-size: 1.2rem;
+                margin-left: 0;
+                margin-right: 0;
+            }
+            
+            .hero-image {
+                flex: 1;
+                max-width: 600px;
+            }
+            
+            .cta-button {
+                padding: 15px 35px;
+                font-size: 1.1rem;
+            }
+            
+            .section-title {
+                margin: 60px 0 40px;
+            }
+            
+            .section-title h2 {
+                font-size: 2.5rem;
+            }
+            
+            .category-filter {
+                gap: 15px;
+                margin-bottom: 40px;
+            }
+            
+            .category-btn {
+                padding: 10px 25px;
+                font-size: 1rem;
+            }
+            
+            .menu-grid {
+                gap: 30px;
+                margin-bottom: 60px;
+            }
+            
+            .item-image {
+                height: 200px;
+            }
+            
+            .item-info {
+                padding: 20px;
+            }
+            
+            .item-info h3 {
+                font-size: 1.4rem;
+            }
+            
+            .item-info p {
+                font-size: 0.95rem;
+            }
+            
+            .add-to-cart {
+                padding: 10px 20px;
+                font-size: 1rem;
+            }
+            
+            .cart-sidebar {
+                max-width: 400px;
+                right: -400px;
+            }
+            
+            .cart-item-image {
+                width: 70px;
+                height: 70px;
+            }
+            
+            .cart-item-info h4 {
+                font-size: 1.1rem;
+            }
+            
+            .cart-total {
+                font-size: 1.3rem;
+            }
+            
+            footer {
+                padding: 60px 0 30px;
+                margin-top: 60px;
+            }
+            
+            .footer-column h3 {
+                font-size: 1.3rem;
+            }
+            
+            .form-row {
+                gap: 20px;
+            }
+            
+            .logo h1 {
+                font-size: 36px;
+            }
+            
+            .logo-subtitle {
+                font-size: 11px;
+            }
+            
+            .logo-image {
+                width: 80px;
+                height: 80px;
+            }
+            
+            .pix-content {
+                max-width: 500px;
+            }
+            
+            .location-section {
+                flex-direction: row;
+                justify-content: space-between;
+                text-align: left;
+                padding: 30px;
+            }
+            
+            .location-info {
+                flex: 1;
+                padding-right: 30px;
+            }
+            
+            .location-photo-container {
+                flex: 1;
+                max-width: 500px;
+            }
+            
+            .location-photo {
+                height: 300px;
+            }
+            
+            /* Ajustes para botões PIX em desktop */
+            .copy-pix-btn {
+                width: auto;
+                display: inline-flex;
+                margin-bottom: 0;
+            }
+            
+            .pix-buttons {
+                flex-direction: row;
+                justify-content: center;
+                gap: 15px;
+            }
+            
+            .confirm-pix-btn,
+            .back-to-checkout-btn {
+                width: auto;
+                min-width: 200px;
+            }
+        }
+
+        /* Mobile Responsive - CORRIGIDO O CARRINHO */
+        @media (max-width: 768px) {
+            .header-container {
+                padding: 12px 15px;
+            }
+            
+            .logo h1 {
+                font-size: 24px;
+            }
+            
+            .logo-image {
+                width: 60px;
+                height: 60px;
+            }
+            
+            .menu-toggle {
+                display: block;
+            }
+            
+            .nav-menu {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 80%;
+                max-width: 300px;
+                height: 100vh;
+                background-color: white;
+                flex-direction: column;
+                justify-content: flex-start;
+                padding-top: 80px;
+                gap: 0;
+                box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+                transition: right 0.4s ease;
+                z-index: 1000;
+            }
+            
+            .nav-menu.active {
+                right: 0;
+            }
+            
+            .nav-link {
+                display: block;
+                padding: 15px 25px;
+                width: 100%;
+                border-bottom: 1px solid #f0f0f0;
+                font-size: 18px;
+            }
+            
+            .nav-link.active::after {
+                display: none;
+            }
+            
+            .nav-link.active {
+                background-color: rgba(77, 120, 115, 0.1);
+            }
+            
+            .cart-icon {
+                margin-left: auto;
+                margin-right: 15px;
+            }
+            
+            .hero {
+                padding: 40px 20px;
+            }
+            
+            .hero h2 {
+                font-size: 1.8rem;
+            }
+            
+            .hero p {
+                font-size: 0.95rem;
+            }
+            
+            .hero-image {
+                max-width: 400px;
+            }
+            
+            .menu-grid {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+            
+            .category-filter {
+                justify-content: center;
+                gap: 8px;
+            }
+            
+            .category-btn {
+                padding: 8px 15px;
+                font-size: 0.85rem;
+            }
+            
+            .add-to-cart {
+                padding: 6px 12px;
+                font-size: 0.8rem;
+            }
+            
+            .footer-top {
+                padding: 15px 0;
+            }
+            
+            .location-photo-container {
+                max-width: 350px;
+            }
+            
+            .location-photo {
+                height: 200px;
+            }
+            
+            .payment-option {
+                min-width: calc(50% - 5px);
+            }
+            
+            .form-row {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            .whatsapp-float {
+                width: 55px;
+                height: 55px;
+                font-size: 28px;
+                bottom: 15px;
+                right: 15px;
+            }
+            
+            .whatsapp-float::after {
+                display: none;
+            }
+            
+            .pix-content {
+                max-width: 100%;
+            }
+            
+            .pix-buttons {
+                flex-direction: column;
+            }
+            
+            .pix-key-value {
+                font-size: 16px;
+            }
+            
+            /* CORREÇÃO PARA CARRINHO EM MOBILE - AGORA COMEÇA FECHADO */
+            .cart-sidebar {
+                top: auto;
+                bottom: -100%; /* Alterado de 0 para -100% */
+                height: 80vh;
+                border-radius: 20px 20px 0 0;
+                box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.1);
+                transition: bottom 0.4s ease;
+                right: 0;
+            }
+            
+            .cart-sidebar.active {
+                bottom: 0; /* Quando ativo, sobe para 0 */
+            }
+            
+            .cart-header {
+                padding: 15px;
+                position: sticky;
+                top: 0;
+                background: white;
+                z-index: 1;
+                border-bottom: 1px solid #eee;
+            }
+            
+            .cart-items {
+                flex: 1;
+                overflow-y: auto;
+                padding: 15px;
+                max-height: calc(70vh - 150px);
+            }
+            
+            .cart-footer {
+                padding: 12px 15px;
+                position: sticky;
+                bottom: 0;
+                background: white;
+                box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+                z-index: 1;
+            }
+            
+            .cart-total {
+                font-size: 1.1rem;
+                margin-bottom: 10px;
+            }
+            
+            .whatsapp-btn {
+                padding: 10px;
+                font-size: 0.95rem;
+            }
+            
+            .cart-item {
+                padding: 10px 0;
+                margin-bottom: 10px;
+                align-items: flex-start;
+            }
+            
+            .cart-item-image {
+                width: 45px;
+                height: 45px;
+                margin-right: 10px;
+            }
+            
+            .cart-item-info h4 {
+                font-size: 0.95rem;
+                margin-bottom: 3px;
+            }
+            
+            .cart-item-info p {
+                font-size: 0.85rem;
+            }
+            
+            .cart-item-controls {
+                margin-top: 5px;
+                width: 100%;
+                justify-content: flex-start;
+            }
+            
+            /* Ajustes para modais em mobile */
+            .checkout-modal,
+            .pix-modal {
+                padding: 10px;
+                align-items: flex-end;
+            }
+            
+            .checkout-form,
+            .pix-content {
+                max-height: 85vh;
+                border-radius: 15px 15px 0 0;
+            }
+            
+            .checkout-body,
+            .pix-body {
+                padding: 15px;
+            }
+            
+            .send-whatsapp-btn,
+            .confirm-pix-btn,
+            .back-to-checkout-btn {
+                padding: 14px;
+                font-size: 1rem;
+            }
+            
+            /* CORREÇÃO PARA PIX MODAL EM MOBILE */
+            .pix-content {
+                display: flex;
+                flex-direction: column;
+                max-height: 85vh;
+            }
+            
+            .pix-body {
+                flex: 1;
+                overflow-y: auto;
+                padding: 15px;
+            }
+            
+            .pix-footer {
+                padding: 15px;
+                border-top: 1px solid #eee;
+                background: white;
+                flex-shrink: 0;
+            }
+            
+            .pix-buttons {
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .confirm-pix-btn,
+            .back-to-checkout-btn {
+                display: block !important;
+                visibility: visible !important;
+                opacity: 1 !important;
+                width: 100%;
+                padding: 12px;
+                font-size: 0.95rem;
+            }
+            
+            /* Botão Copiar Chave PIX no mobile - NOVO */
+            .mobile-copy-pix-btn {
+                display: flex !important;
+                width: 100%;
+                margin-bottom: 10px;
+            }
+            
+            /* Esconder o botão copiar do corpo em mobile */
+            .pix-body .copy-pix-btn {
+                display: none;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .logo h1 {
+                font-size: 20px;
+            }
+            
+            .logo-subtitle {
+                font-size: 9px;
+            }
+            
+            .logo-image {
+                width: 50px;
+                height: 50px;
+            }
+            
+            .hero h2 {
+                font-size: 1.5rem;
+            }
+            
+            .hero p {
+                font-size: 0.9rem;
+            }
+            
+            .hero-image {
+                max-width: 300px;
+            }
+            
+            .section-title h2 {
+                font-size: 1.8rem;
+            }
+            
+            .category-btn {
+                padding: 6px 12px;
+                font-size: 0.8rem;
+            }
+            
+            .item-image {
+                height: 150px;
+            }
+            
+            .add-to-cart {
+                padding: 5px 10px;
+                font-size: 0.75rem;
+            }
+            
+            .whatsapp-float {
+                width: 50px;
+                height: 50px;
+                font-size: 24px;
+                bottom: 10px;
+                right: 10px;
+            }
+            
+            .pix-key-value {
+                font-size: 14px;
+            }
+            
+            .location-photo-container {
+                max-width: 300px;
+            }
+            
+            .location-photo {
+                height: 180px;
+            }
+            
+            .payment-option {
+                min-width: 100%;
+            }
+            
+            .checkout-modal,
+            .pix-modal {
+                padding: 5px;
+            }
+            
+            /* CORREÇÕES ADICIONAIS PARA TELAS PEQUENAS */
+            .cart-sidebar {
+                height: 85vh;
+                bottom: -100%; /* Mantém fechado */
+            }
+            
+            .cart-sidebar.active {
+                bottom: 0; /* Abre quando ativo */
+            }
+            
+            .cart-items {
+                max-height: calc(75vh - 140px);
+                padding: 12px;
+            }
+            
+            .cart-item {
+                flex-wrap: wrap;
+                padding: 8px 0;
+                margin-bottom: 8px;
+            }
+            
+            .cart-item-info {
+                min-width: 60%;
+            }
+            
+            .cart-item-controls {
+                width: 100%;
+                justify-content: space-between;
+                margin-top: 8px;
+                padding-top: 8px;
+                border-top: 1px dashed #f0f0f0;
+            }
+            
+            .cart-footer {
+                padding: 10px 12px;
+            }
+            
+            .cart-total {
+                font-size: 1rem;
+                margin-bottom: 8px;
+            }
+            
+            .whatsapp-btn {
+                padding: 8px 10px;
+                font-size: 0.9rem;
+            }
+            
+            .checkout-body {
+                padding: 12px;
+                max-height: 60vh;
+                overflow-y: auto;
+            }
+            
+            .checkout-footer {
+                padding: 12px;
+            }
+            
+            .form-group {
+                margin-bottom: 15px;
+            }
+            
+            .form-group input,
+            .form-group textarea,
+            .form-group select {
+                padding: 10px;
+                font-size: 16px; /* Importante para iOS */
+            }
+            
+            .payment-option label {
+                padding: 12px 8px;
+                font-size: 0.85rem;
+            }
+        }
+
+        /* Overlay para menu mobile */
+        .nav-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease;
+        }
+        
+        .nav-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        /* Scrollbar personalizada */
+        .checkout-form::-webkit-scrollbar,
+        .cart-items::-webkit-scrollbar,
+        .pix-content::-webkit-scrollbar {
+            width: 6px;
+        }
+        
+        .checkout-form::-webkit-scrollbar-track,
+        .cart-items::-webkit-scrollbar-track,
+        .pix-content::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        
+        .checkout-form::-webkit-scrollbar-thumb,
+        .cart-items::-webkit-scrollbar-thumb,
+        .pix-content::-webkit-scrollbar-thumb {
+            background: #c1c1c1;
+            border-radius: 3px;
+        }
+        
+        .checkout-form::-webkit-scrollbar-thumb:hover,
+        .cart-items::-webkit-scrollbar-thumb:hover,
+        .pix-content::-webkit-scrollbar-thumb:hover {
+            background: #a1a1a1;
+        }
+        
+        /* Correção para formulários em iOS */
+        input, textarea, select {
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            border-radius: 8px;
+        }
+        
+        /* Evitar zoom em inputs no iOS */
+        @media screen and (max-width: 768px) {
+            input, textarea, select {
+                font-size: 16px !important;
+            }
+        }
+        
+        /* Indicador de scroll para carrinho em mobile */
+        @media (max-width: 768px) {
+            .cart-items::after {
+                content: '';
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                height: 20px;
+                background: linear-gradient(to bottom, transparent, rgba(255,255,255,0.9));
+                pointer-events: none;
+                opacity: 0;
+                transition: opacity 0.3s ease;
+            }
+            
+            .cart-items.has-scroll::after {
+                opacity: 1;
+            }
+        }
+        
+        /* Garantir que botões do PIX sejam visíveis */
+        .mobile-copy-pix-btn {
+            display: none;
+        }
+        
+        @media (max-width: 768px) {
+            .mobile-copy-pix-btn {
+                display: flex !important;
+            }
+        }
+
+        /* GARANTIR QUE OS FORMULÁRIOS APAREÇAM - CORREÇÃO FINAL */
+        .checkout-modal {
+            display: none;
+        }
+        
+        .checkout-modal.active {
+            display: flex;
+        }
+        
+        .pix-modal {
+            display: none;
+        }
+        
+        .pix-modal.active {
+            display: flex;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <a href="#" class="logo">
+                <!-- Logo com imagem online - CORRIGIDA -->
+                <img src="logo.jpg" class="logo-image" alt="Logo LA CASA BURGUER">
+                <div class="logo-text">
+                    <h1>LA CASA <span>BURGUER</span></h1>
+                    <div class="logo-subtitle">MELHOR SABOR ESTA AQUI!</div>
+                </div>
+            </a>
+
+            <!-- Menu de Navegação -->
+            <nav class="nav-menu" id="navMenu">
+                <a href="#" class="nav-link active">Início</a>
+                <a href="#menu" class="nav-link">Cardápio</a>
+                <a href="#contact" class="nav-link">Contato</a>
+            </nav>
+
+            <!-- Ícone do Carrinho -->
+            <div class="cart-icon" id="cartToggle">
+                <i class="fas fa-shopping-cart"></i>
+                <span class="cart-count" id="cartCount">0</span>
+            </div>
+
+            <!-- Botão Menu Hambúrguer -->
+            <button class="menu-toggle" id="menuToggle">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+        
+        <!-- Overlay para menu mobile -->
+        <div class="nav-overlay" id="navOverlay"></div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h2>Os melhores lanches da região</h2>
+                    <a href="#menu" class="cta-button">Ver Cardápio</a>
+                </div>
+                <div class="hero-image">
+                    <!-- Logo na tela inicial -->
+                    <img src="logo.jpg" alt="Logo LA CASA BURGUER">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção Cardápio -->
+    <section id="menu">
+        <div class="container">
+            <div class="section-title">
+                <h2>Nosso Cardápio</h2>
+            </div>
+
+            <!-- Filtros de Categoria -->
+            <div class="category-filter">
+                <button class="category-btn active" data-category="hamburgueres">
+                    <i class="fas fa-hamburger"></i> Hamburgueres
+                </button>
+                <button class="category-btn" data-category="especiais">
+                    <i class="fas fa-crown"></i> Especiais
+                </button>
+                <button class="category-btn" data-category="pasteis">
+                    <i class="fas fa-pastafarianism"></i> Pastéis
+                </button>
+                <button class="category-btn" data-category="paoarabe">
+                    <i class="fas fa-bread-slice"></i> Pão Árabe
+                </button>
+                <button class="category-btn" data-category="salgados">
+                    <i class="fas fa-drumstick-bite"></i> Salgados
+                </button>
+                <button class="category-btn" data-category="batata">
+                    <i class="fas fa-potato"></i> Batata Frita
+                </button>
+                <button class="category-btn" data-category="sucos">
+                    <i class="fas fa-glass-whiskey"></i> Sucos
+                </button>
+                <button class="category-btn" data-category="refrigerantes">
+                    <i class="fas fa-wine-bottle"></i> Refrigerantes
+                </button>
+                <button class="category-btn" data-category="agua">
+                    <i class="fas fa-tint"></i> Água
+                </button>
+            </div>
+
+            <!-- Grid do Cardápio -->
+            <div class="menu-grid" id="menuGrid">
+                <!-- Itens do cardápio serão gerados via JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Sidebar do Carrinho -->
+    <div class="cart-overlay" id="cartOverlay"></div>
+    <div class="cart-sidebar" id="cartSidebar">
+        <div class="cart-header">
+            <h3>Seu Carrinho</h3>
+            <button class="close-cart" id="closeCart">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="cart-items" id="cartItems">
+            <p style="text-align: center; padding: 40px 20px; color: #999;" id="emptyCartMessage">Seu carrinho está vazio</p>
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span>Total:</span>
+                <span id="cartTotal">R$ 0,00</span>
+            </div>
+            <button class="whatsapp-btn" id="whatsappCheckout">
+                <i class="fab fa-whatsapp"></i> Finalizar Pedido
+            </button>
+        </div>
+    </div>
+
+    <!-- Modal de Checkout/Formulário de Dados -->
+    <div class="checkout-modal" id="checkoutModal">
+        <div class="checkout-form">
+            <div class="checkout-header">
+                <h3>Informações para Entrega</h3>
+                <button class="close-checkout" id="closeCheckout">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="checkout-body">
+                <form id="customerForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="customerName">Nome Completo *</label>
+                            <input type="text" id="customerName" name="customerName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="customerPhone">Telefone/WhatsApp *</label>
+                            <input type="tel" id="customerPhone" name="customerPhone" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="customerAddress">Endereço Completo *</label>
+                        <input type="text" id="customerAddress" name="customerAddress" placeholder="Rua, Número, Bairro" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Forma de Pagamento *</label>
+                        <div class="payment-options">
+                            <div class="payment-option">
+                                <input type="radio" id="paymentCash" name="paymentMethod" value="Dinheiro" checked>
+                                <label for="paymentCash">
+                                    <i class="fas fa-money-bill-wave"></i>
+                                    <span>Dinheiro</span>
+                                </label>
+                            </div>
+                            <div class="payment-option">
+                                <input type="radio" id="paymentCard" name="paymentMethod" value="Cartão">
+                                <label for="paymentCard">
+                                    <i class="fas fa-credit-card"></i>
+                                    <span>Cartão</span>
+                                </label>
+                            </div>
+                            <div class="payment-option">
+                                <input type="radio" id="paymentPix" name="paymentMethod" value="PIX">
+                                <label for="paymentPix">
+                                    <i class="fas fa-qrcode"></i>
+                                    <span>PIX</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="changeFor">Troco para (se for dinheiro)</label>
+                        <input type="text" id="changeFor" name="changeFor" placeholder="Ex: R$ 50,00">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="customerNotes">Observações do Pedido</label>
+                        <textarea id="customerNotes" name="customerNotes" placeholder="Alguma observação sobre o pedido? Ex: sem cebola, ponto da carne, etc."></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="checkout-footer">
+                <button class="send-whatsapp-btn" id="sendWhatsApp">
+                    <i class="fab fa-whatsapp"></i> Enviar Pedido via WhatsApp
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Chave PIX -->
+    <div class="pix-modal" id="pixModal">
+        <div class="pix-content">
+            <div class="pix-header">
+                <i class="fas fa-qrcode pix-icon"></i>
+                <h3>Pagamento via PIX</h3>
+                <p>Copie a chave PIX abaixo para realizar o pagamento</p>
+            </div>
+            <div class="pix-body">
+                <p>Após copiar a chave PIX, realize o pagamento no seu aplicativo bancário e confirme o pedido.</p>
+                
+                <div class="pix-key-container">
+                    <span class="pix-key-label">Chave PIX (CNPJ/CPF):</span>
+                    <div class="pix-key-value" id="pixKeyValue">45156937000199</div>
+                    <button class="copy-pix-btn" id="copyPixBtnDesktop">
+                        <i class="far fa-copy"></i> Copiar Chave PIX
+                    </button>
+                </div>
+
+                <div class="payment-warning">
+                    <strong><i class="fas fa-exclamation-circle"></i> Importante:</strong><br>
+                    1. Copie a chave PIX acima<br>
+                    2. Abra seu aplicativo bancário<br>
+                    3. Cole a chave no campo PIX<br>
+                    4. Confirme o pagamento<br>
+                    5. Volte aqui e clique em "Já efetuei o pagamento"
+                </div>
+            </div>
+            <div class="pix-footer">
+                <p>Após efetuar o pagamento, clique no botão abaixo para enviar o pedido.</p>
+                <div class="pix-buttons">
+                    <button class="copy-pix-btn mobile-copy-pix-btn" id="copyPixBtnMobile">
+                        <i class="far fa-copy"></i> Copiar Chave PIX
+                    </button>
+                    <button class="confirm-pix-btn" id="confirmPixBtn">
+                        <i class="fab fa-whatsapp"></i> Já efetuei o pagamento
+                    </button>
+                    <button class="back-to-checkout-btn" id="backToCheckoutBtn">
+                        <i class="fas fa-arrow-left"></i> Voltar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <!-- Seção de Localização da Lanchonete -->
+        <div class="footer-top">
+            <div class="container">
+                <div class="location-section">
+                    <div class="location-info">
+                        <h3 class="location-title">Nossa Localização</h3>
+                        <p class="location-address">
+                            <i class="fas fa-map-marker-alt"></i> Rua Carlos Cornélio, Centro - Próximo à Praça Central<br>
+                            <i class="fas fa-clock"></i> Terça a Domingo: 17h às 22:40h
+                        </p>
+                        <p>Venha nos visitar ou faça seu pedido para delivery!</p>
+                        <a href="https://maps.app.goo.gl/zsw1dbUZTbXQwJeN9?g_st=ic" target="_blank" class="open-map-btn">
+                            <i class="fas fa-map-marked-alt"></i> Ver no Google Maps
+                        </a>
+                    </div>
+                    <div class="location-photo-container" id="locationPhoto">
+                        <!-- Imagem de localização online - CORRIGIDA -->
+                        <img src="localizacao.jpg" alt="Localização da LA CASA BURGUER" class="location-photo">
+                        <div class="location-overlay">
+                            <i class="fas fa-map-marker-alt location-icon"></i>
+                            <span class="location-text">Clique para ver no mapa</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>LA CASA BURGUER</h3>
+                    <p>Há mais de 3 anos servindo os melhores lanches da cidade com qualidade e sabor incomparáveis.</p>
+                    <div class="social-icons">
+                        <a href="https://www.instagram.com/lacasaburguerr01?igsh=MTR0cHlucXVpcDU1cw%3D%3D&utm_source=qr" target="_blank"><i class="fab fa-instagram"></i></a>
+                        <a href="https://l.instagram.com/?u=https%3A%2F%2Fwa.me%2Fmessage%2FY42W44OQR32QF1%3Futm_source%3Dig%26utm_medium%3Dsocial%26utm_content%3Dlink_in_bio%26fbclid%3DPAZXh0bgNhZW0CMTEAc3J0YwZhcHBfaWQMMjU2MjgxMDQwNTU4AAGnQyYV2OIrEVQbTSQaDOWLDvnoWO01qJTuy6L45gqSbPXW5L3S8ciUIWX5UD0_aem_SFOh9hQgxkjiSu3vRz6-kw&e=AT2m9yrLJe5zWiqo5hpyXgfvczxSgN33eVQRYA0h4oIeX-EAttoaqe55F3FTdo7e7OgJ-bu6uGK3dsRUwx9FikwW7TdjoTEGVcDPIXsrbg" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Horário de Funcionamento</h3>
+                    <p>Terça a Domingo: 17h às 22:40h</p>
+                    <p>Fechado às segundas-feiras</p>
+                </div>
+                <div class="footer-column">
+                    <h3>Contato</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> Rua Carlos Cornélio, - Centro</p>
+                    <p><i class="fas fa-phone"></i> (55) 87 9 8119-3590</p>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; LA CASA BURGUER</p>
+                <p>&copy; CRIADO POR  ACR DEVELOPER</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Botão flutuante do WhatsApp -->
+    <a href="https://wa.me/5587981193590" class="whatsapp-float" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <script>
+        // Dados do cardápio COMPLETO atualizado
+        const menuItems = [
+            // HAMBÚRGUERES (inclui BAURU)
+            { id: 1, name: "BAURU", description: "Mussarela, presunto e salada.", price: 8.00, category: "hamburgueres", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcREmTbA73X3qSP74PnxdP9hp_AdEOeDUC4pFQ&s" },
+            { id: 2, name: "Hambúrguer", description: "Pão, carne, mussarela e presunto.", price: 9.00, category: "hamburgueres", image: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" },
+            { id: 3, name: "X-Burguer", description: "Pão, carne, mussarela, presunto, salada e creme cheese.", price: 10.00, category: "hamburgueres", image: "https://images.unsplash.com/photo-1550547660-d9450f859349?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" },
+            { id: 4, name: "X-Salada", description: "Pão, carne, ovo, mussarela, presunto, salada e creme cheese.", price: 11.00, category: "hamburgueres", image: "https://images.unsplash.com/photo-1565299507177-b0ac66763828?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" },
+            { id: 5, name: "X-Bacon", description: "Pão, carne, bacon, mussarela, presunto, salada, creme cheese e cheddar.", price: 12.00, category: "hamburgueres", image: "https://plus.unsplash.com/premium_photo-1675283476222-6a1a01d6a0ba?w=400&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDR8fHxlbnwwfHx8fHw%3D" },
+            { id: 6, name: "X-BigBacon", description: "Pão, carne, bacon, ovo, presunto, mussarela, salada, creme cheese e cheddar.", price: 13.00, category: "hamburgueres", image: "https://images.unsplash.com/photo-1598182198871-d3f4ab4fd181?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },
+            { id: 7, name: "X-Calabresa", description: "Pão, carne, calabresa, mussarela, presunto, salada e creme cheese.", price: 12.00, category: "hamburgueres", image: "https://images.unsplash.com/photo-1550317138-10000687a72b?w=400&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTZ8fGhhbWIlQzMlQkFyZ3VlcnxlbnwwfHwwfHx8MA%3D%3D" },
+            { id: 8, name: "X-Calabresa Egg", description: "Pão, carne, calabresa, ovo, mussarela, presunto, salada, creme cheese e cheddar.", price: 13.00, category: "hamburgueres", image: "https://images.unsplash.com/photo-1724352476668-6cbd99da2d6b?w=400&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDU3fHx8ZW58MHx8fHx8" },
+            { id: 9, name: "X-Frango", description: "Pão, carne, frango, mussarela, presunto, salada e creme cheese.", price: 12.00, category: "hamburgueres", image: "https://images.unsplash.com/photo-1606755962773-d324e0a13086?w=400&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8aGFtYiVDMyVCQXJndWVyJTIwZnJhbmdvfGVufDB8fDB8fHww" },
+            { id: 10, name: "X-Frango Egg", description: "Pão, carne, frango, ovo, mussarela, presunto, salada, creme cheese e cheddar.", price: 13.00, category: "hamburgueres", image: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" },
+            { id: 11, name: "X-FranBacon", description: "Pão, carne, frango, bacon, mussarela, presunto, salada, creme cheese e cheddar.", price: 14.00, category: "hamburgueres", image: "https://images.unsplash.com/photo-1594212699903-ec8a3eca50f5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" },
+            { id: 12, name: "X-Nordestino", description: "Pão, carne, carne seca, mussarela, presunto, salada, creme cheese e cheddar.", price: 16.00, category: "hamburgueres", image: "https://images.unsplash.com/photo-1553979459-d2229ba7433b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" },
+            { id: 13, name: "X-Tudo", description: "Pão, carne, bacon, calabresa, frango, ovo, mussarela, presunto, salada, creme cheese e cheddar.", price: 16.00, category: "hamburgueres", image: "https://images.unsplash.com/photo-1607013251379-e6eecfffe234?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" },
+            { id: 14, name: "X-Apimentado", description: "Pão, carne, bacon, mussarela, presunto, molho apimentado, salada, creme cheese e cheddar.", price: 16.00, category: "hamburgueres", image: "https://images.unsplash.com/photo-1629680871149-434f75071693?w=400&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTl8fGhhbmJ1cmd1ZXIlMjBkZSUyMCUyMGFwaW1lbnRhZG98ZW58MHx8MHx8fDA%3D" },
+            
+            // HAMBÚRGUERES ESPECIAIS
+            { id: 15, name: "X-Tudo Apimentado", description: "Pão, carne, bacon, calabresa, frango, ovo, mussarela, presunto, salada, molho apimentado, creme cheese e cheddar.", price: 17.00, category: "especiais", image: "https://images.unsplash.com/photo-1607013251379-e6eecfffe234?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" },
+            { id: 16, name: "X-Nordestino Apimentado", description: "Pão, carne, carne seca, mussarela, presunto, salada, molho apimentado, creme cheese e cheddar.", price: 17.00, category: "especiais", image: "https://images.unsplash.com/photo-1553979459-d2229ba7433b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" },
+            { id: 17, name: "Moda da Casa", description: "Pão GG, carne, bacon, frango, calabresa, ovo, mussarela, presunto, salada, cheddar e creme cheese.", price: 20.00, category: "especiais", image: "https://images.unsplash.com/photo-1565299507177-b0ac66763828?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" },
+            { id: 18, name: "X-Renatão", description: "Pão GG, 2 carnes, 2 ovos, bacon, frango, calabresa, 2 presunto, 2 mussarela, salada creme cheese e cheddar.", price: 25.00, category: "especiais", image: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" },
+            
+            // PASTÉIS
+            { id: 19, name: "Pastel de Frango", description: "Pastel crocante recheado com frango temperado", price: 8.00, category: "pasteis", image: "https://media.istockphoto.com/id/1475705893/pt/foto/chicken-fried-pastry-brazilian-street-food-pastel.jpg?s=612x612&w=0&k=20&c=5uyhKdghy2eB0RwHeTOAbSb3b_a_7QRm88YStnwXl4M=" },
+            { id: 20, name: "Pastel de Queijo", description: "Pastel crocante recheado com queijo derretido", price: 8.00, category: "pasteis", image: "https://media.istockphoto.com/id/1297820183/pt/foto/cheese-pastry-typical-brazilian-savory-stuffed-with-cheese.jpg?s=612x612&w=0&k=20&c=4ELgK_d6KJGomHEam_Zl8gR83-ncjzSdtXA1ArVvM6U=" },
+            { id: 21, name: "Pastel de Calabresa", description: "Pastel crocante recheado com calabresa", price: 8.00, category: "pasteis", image: "https://media.istockphoto.com/id/1501195934/pt/foto/fair-pastel-brazilian-typical-cuisine.jpg?s=612x612&w=0&k=20&c=OgIZdajgAo1hGe0XhUT2oVb2rq0dKQY21INhmFuo8yg=" },
+            { id: 22, name: "Pastel Misto", description: "Pastel crocante recheado com frango e queijo", price: 8.00, category: "pasteis", image: "https://media.istockphoto.com/id/1463848826/pt/foto/brazilian-pastry-typical-fried-salty-stuffed-with-ground-beef-sauce-and-pepper-typical.jpg?s=612x612&w=0&k=20&c=0oVZeNedjWINGJxwrA0aG5D2Vs3l5VjsXmVFBSLefIM=" },
+            { id: 23, name: "Pastel Frango/Queijo", description: "Pastel com recheio de frango e queijo", price: 9.00, category: "pasteis", image: "https://media.istockphoto.com/id/2181599388/pt/foto/pastel-golden-crispy-fried-dough.jpg?s=612x612&w=0&k=20&c=_eRMwUOwzwKH9ppt16wsi85iX3x3xtENLsJy-qG87Yg=" },
+            { id: 24, name: "Pastel Calabresa/Queijo", description: "Pastel com recheio de calabresa e queijo", price: 9.00, category: "pasteis", image: "https://media.istockphoto.com/id/1024259516/pt/foto/pastel-brazilian-snack.jpg?s=612x612&w=0&k=20&c=YP6sWP54OlzNaGdfoakEwMkknn2yBwLHjivtoRxSL6o=" },
+            { id: 25, name: "Pastel Frango/Catupiry", description: "Pastel com recheio de frango e catupiry", price: 9.00, category: "pasteis", image: "https://media.istockphoto.com/id/2023332253/pt/foto/pastel-crocante-de-feira-brazilian-food-in-aerial-top-view.jpg?s=612x612&w=0&k=20&c=pdugGaq-Xxj4s6qXEGih7yIDtqc1vjPKHMW8psB_Hhw=" },
+            { id: 26, name: "Pastel FranBacon", description: "Pastel com recheio de frango e bacon", price: 9.00, category: "pasteis", image: "https://media.istockphoto.com/id/1367221148/pt/foto/pastels-and-glass-of-beer.jpg?s=612x612&w=0&k=20&c=nVuFqmNoSB3o5HJJNECOEAnkoFjpVa1hbV6r_uczBEI=" },
+            { id: 27, name: "Pastel Frango/Milho", description: "Pastel com recheio de frango e milho", price: 9.00, category: "pasteis", image: "https://media.istockphoto.com/id/1463848826/pt/foto/brazilian-pastry-typical-fried-salty-stuffed-with-ground-beef-sauce-and-pepper-typical.jpg?s=612x612&w=0&k=20&c=0oVZeNedjWINGJxwrA0aG5D2Vs3l5VjsXmVFBSLefIM=" },
+            { id: 28, name: "Pastel Pizza", description: "Pastel com sabor de pizza", price: 9.00, category: "pasteis", image: "https://media.istockphoto.com/id/1213582606/pt/foto/traditional-pastry-called-pastel-in-portuguese.jpg?s=612x612&w=0&k=20&c=9_1txGU_eqSSYXMJsz86QFZb8O8-jmtkJaeoXklfmRU=" },
+            { id: 29, name: "Pastel Carne de Sol", description: "Pastel com recheio de carne de sol", price: 9.00, category: "pasteis", image: "https://media.istockphoto.com/id/2157280209/pt/foto/indian-sweet-item-popularly-known-as-karanji-or-gujiya-is-served-on-bowl.jpg?s=612x612&w=0&k=20&c=61YPKdvN42kZXUlDXFaD-tfJ5FBD524fnbbOq69FT6I=" },
+            { id: 30, name: "Pastel Carne de Sol/Queijo", description: "Pastel com recheio de carne de sol e queijo", price: 9.00, category: "pasteis", image: "https://media.istockphoto.com/id/1485791157/pt/foto/pocket-pizza.jpg?s=612x612&w=0&k=20&c=fOTllKhAlitHvN8qfiSr-JNBpKePvFnn1dCmkkVRQ88=" },
+            
+            // PÃO ÁRABE
+            { id: 31, name: "Pão Árabe Opção 01", description: "Frango, calabresa, mussarela, catupiry e salada.", price: 16.00, category: "paoarabe", image: "https://media.istockphoto.com/id/1222451272/pt/foto/kuboos-or-khubz-fresh-pita-bread-togeather-in-a-table.jpg?s=612x612&w=0&k=20&c=8hGjKzQvWuh6DQLpVSqto8yhN2czCl3Gw6w-lK5bvHA=" },
+            { id: 32, name: "Pão Árabe Opção 02", description: "Carne de sol, mussarela, presunto, catupiry e salada.", price: 18.00, category: "paoarabe", image: "https://media.istockphoto.com/id/1222451272/pt/foto/kuboos-or-khubz-fresh-pita-bread-togeather-in-a-table.jpg?s=612x612&w=0&k=20&c=8hGjKzQvWuh6DQLpVSqto8yhN2czCl3Gw6w-lK5bvHA=" },
+            { id: 33, name: "Pão Árabe Opção 03", description: "2 pães, carne de sol, frango, calabresa, mussarela, presunto, catupiry e salada.", price: 26.00, category: "paoarabe", image: "https://media.istockphoto.com/id/1222451272/pt/foto/kuboos-or-khubz-fresh-pita-bread-togeather-in-a-table.jpg?s=612x612&w=0&k=20&c=8hGjKzQvWuh6DQLpVSqto8yhN2czCl3Gw6w-lK5bvHA=" },
+            
+            // SALGADOS
+            { id: 34, name: "Coxinha de Frango", description: "Coxinha de frango cremoso", price: 7.00, category: "salgados", image: "https://img.freepik.com/fotos-premium/coxinha-frita-tradicional-em-uma-mesa-de-madeira-em-foco-seletivo-lanche-brasileiro_425154-9800.jpg" },
+            { id: 35, name: "Coxinha de Carne de Sol", description: "Coxinha recheada com carne de sol", price: 7.00, category: "salgados", image: "https://img.freepik.com/fotos-premium/coxinha-frita-tradicional-em-uma-mesa-de-madeira-em-foco-seletivo-lanche-brasileiro_425154-9800.jpg" },
+            { id: 36, name: "Risole", description: "Risole crocante com recheio especial", price: 7.00, category: "salgados", image: "https://t4.ftcdn.net/jpg/15/82/68/15/360_F_1582681538_NJ9upigZl91BDAlrcD9zZVcO0D3b2hIW.jpg" },
+            
+            // BATATA FRITA
+            { id: 37, name: "Batata Frita Pequena", description: "Porção pequena de batata frita crocante", price: 13.00, category: "batata", image: "https://media.istockphoto.com/id/157510962/pt/foto/batata-frita-no-prato.webp?a=1&b=1&s=612x612&w=0&k=20&c=cvNuQhjYOfK_Etm5dcKDqxg8Tlc2axV1tcpUVYcq4LY=" },
+            { id: 38, name: "Batata Frita Grande", description: "Porção grande de batata frita crocante", price: 17.00, category: "batata", image: "https://media.istockphoto.com/id/157510962/pt/foto/batata-frita-no-prato.webp?a=1&b=1&s=612x612&w=0&k=20&c=cvNuQhjYOfK_Etm5dcKDqxg8Tlc2axV1tcpUVYcq4LY=" },
+            { id: 39, name: "Batata Frita Completa", description: "Batata frita com bacon, cheddar e molho especial", price: 25.00, category: "batata", image: "https://media.istockphoto.com/id/157510962/pt/foto/batata-frita-no-prato.webp?a=1&b=1&s=612x612&w=0&k=20&c=cvNuQhjYOfK_Etm5dcKDqxg8Tlc2axV1tcpUVYcq4LY=" },
+            { id: 40, name: "Acompanhamento: Bacon", description: "Porção de bacon crocante", price: 3.00, category: "batata", image: "https://images.unsplash.com/photo-1694983361629-0363ab0d1b49?w=400&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8YmFjb258ZW58MHx8MHx8fDA%3D" },
+            { id: 41, name: "Acompanhamento: Calabresa", description: "Porção de calabresa fatiada", price: 3.00, category: "batata", image: "https://img.freepik.com/fotos-gratis/delicioso-chorizo-cortado-em-um-prato_23-2148974655.jpg?semt=ais_hybrid&w=740&q=80" },
+            { id: 42, name: "Acompanhamento: Cheddar", description: "Porção de cheddar cremoso", price: 3.00, category: "batata", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSY_q1nyI43vBGuqFrvBmMfreLUcK1dUoI9VJ-16YLjaw&s" },
+            { id: 43, name: "Acompanhamento: Catupiry", description: "Porção de catupiry cremoso", price: 3.00, category: "batata", image: "https://mesaesabor.com.br/wp-content/uploads/2022/02/58-Receita-de-Catupiry-Caseiro.jpg" },
+            
+            // SUCOS (sem leite)
+            { id: 44, name: "Suco de Maracujá (sem leite)", description: "Suco natural de maracujá", price: 6.00, category: "sucos", image: "https://media.istockphoto.com/id/666898298/pt/foto/passion-fruit-and-juice.jpg?s=612x612&w=0&k=20&c=JeMaOuyU-EMjS2wnk5-rMCRYtXKMvJUnjOdcFRkal3o=" },
+            { id: 45, name: "Suco de Abacaxi (sem leite)", description: "Suco natural de abacaxi", price: 6.00, category: "sucos", image: "https://media.istockphoto.com/id/1321455916/pt/foto/ripe-pineapple-fruit-and-pineapple-juice-on-a-natural-wooden-background-summer-close-up.jpg?s=612x612&w=0&k=20&c=AUzC1oTuKNvv-5DSOXvesWbiIQHD_4G504woqyfw8d4=" },
+            { id: 46, name: "Suco de Acerola (sem leite)", description: "Suco natural de acerola", price: 6.00, category: "sucos", image: "https://media.istockphoto.com/id/1341250551/pt/foto/acerola-cherry-fruits-and-juice.jpg?s=612x612&w=0&k=20&c=F4QMDWEOMGtB76gLnw8ERMZpB053x8AFX5wi7ZUdQE8=" },
+            { id: 47, name: "Suco de Graviola (sem leite)", description: "Suco natural de graviola", price: 6.00, category: "sucos", image: "https://www.receiteria.com.br/wp-content/uploads/suco-de-graviola.png" },
+            { id: 48, name: "Suco de Caju (sem leite)", description: "Suco natural de caju", price: 6.00, category: "sucos", image: "https://media.istockphoto.com/id/862321280/pt/foto/brazilian-cashew-juice.jpg?s=612x612&w=0&k=20&c=HfhYk9BrJIPY_CHHyzGugXQWEPAqu0uTyfUF4XaS9fU=" },
+            { id: 49, name: "Suco de Cajá (sem leite)", description: "Suco natural de cajá", price: 6.00, category: "sucos", image: "https://images.tcdn.com.br/img/img_prod/763396/90_polpa_de_caja_555_1_e7ed7718e50888913f719971fa22f59a.jpg" },
+            { id: 50, name: "Suco de Goiaba (sem leite)", description: "Suco natural de goiaba", price: 6.00, category: "sucos", image: "https://images.unsplash.com/photo-1573514211048-0ab3094b744f?q=80&w=1287&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },
+            { id: 51, name: "Suco de Morango (sem leite)", description: "Suco natural de morango", price: 6.00, category: "sucos", image: "https://plus.unsplash.com/premium_photo-1726765809820-80c09e800f3b?q=80&w=1287&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },
+            { id: 52, name: "Suco de Manga (sem leite)", description: "Suco natural de manga", price: 6.00, category: "sucos", image: "https://images.unsplash.com/photo-1680588194311-6eb00e9c1e25?w=400&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDQxfHx8ZW58MHx8fHx8" },
+            
+            // SUCOS (com leite)
+            { id: 53, name: "Suco de Maracujá (com leite)", description: "Vitamina de maracujá com leite", price: 7.00, category: "sucos", image: "https://media.istockphoto.com/id/666898298/pt/foto/passion-fruit-and-juice.jpg?s=612x612&w=0&k=20&c=JeMaOuyU-EMjS2wnk5-rMCRYtXKMvJUnjOdcFRkal3o=" },
+            { id: 54, name: "Suco de Abacaxi (com leite)", description: "Vitamina de abacaxi com leite", price: 7.00, category: "sucos", image: "https://media.istockphoto.com/id/1321455916/pt/foto/ripe-pineapple-fruit-and-pineapple-juice-on-a-natural-wooden-background-summer-close-up.jpg?s=612x612&w=0&k=20&c=AUzC1oTuKNvv-5DSOXvesWbiIQHD_4G504woqyfw8d4=" },
+            { id: 55, name: "Suco de Acerola (com leite)", description: "Vitamina de acerola com leite", price: 7.00, category: "sucos", image: "https://media.istockphoto.com/id/1341250551/pt/foto/acerola-cherry-fruits-and-juice.jpg?s=612x612&w=0&k=20&c=F4QMDWEOMGtB76gLnw8ERMZpB053x8AFX5wi7ZUdQE8=" },
+            { id: 56, name: "Suco de Graviola (com leite)", description: "Vitamina de graviola com leite", price: 7.00, category: "sucos", image: "https://www.receiteria.com.br/wp-content/uploads/suco-de-graviola.png" },
+            { id: 57, name: "Suco de Caju (com leite)", description: "Vitamina de caju com leite", price: 7.00, category: "sucos", image: "https://media.istockphoto.com/id/862321280/pt/foto/brazilian-cashew-juice.jpg?s=612x612&w=0&k=20&c=HfhYk9BrJIPY_CHHyzGugXQWEPAqu0uTyfUF4XaS9fU=" },
+            { id: 58, name: "Suco de Cajá (com leite)", description: "Vitamina de cajá com leite", price: 7.00, category: "sucos", image: "https://images.tcdn.com.br/img/img_prod/763396/90_polpa_de_caja_555_1_e7ed7718e50888913f719971fa22f59a.jpg" },
+            { id: 59, name: "Suco de Goiaba (com leite)", description: "Vitamina de goiaba com leite", price: 7.00, category: "sucos", image: "https://images.unsplash.com/photo-1573514211048-0ab3094b744f?q=80&w=1287&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },
+            { id: 60, name: "Suco de Morango (com leite)", description: "Vitamina de morango com leite", price: 7.00, category: "sucos", image: "https://plus.unsplash.com/premium_photo-1726765809820-80c09e800f3b?q=80&w=1287&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },
+            { id: 61, name: "Suco de Manga (com leite)", description: "Vitamina de manga com leite", price: 7.00, category: "sucos", image: "https://images.unsplash.com/photo-1680588194311-6eb00e9c1e25?w=400&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDQxfHx8ZW58MHx8fHx8" },
+            
+            // REFRIGERANTES
+            { id: 62, name: "Coca-Cola Lata", description: "Coca-Cola em lata 350ml", price: 5.00, category: "refrigerantes", image: "https://i.pinimg.com/736x/8e/d7/29/8ed7298bdfc21b078e0b61977de9858d.jpg" },
+            { id: 63, name: "Coca-Cola Zero Lata", description: "Coca-Cola Zero em lata 350ml", price: 5.00, category: "refrigerantes", image: "https://i.pinimg.com/1200x/df/aa/a2/dfaaa29e51b65d49878babcc6daa2724.jpg" },
+            { id: 64, name: "Guaraná Lata", description: "Guaraná em lata 350ml", price: 5.00, category: "refrigerantes", image: "https://i.pinimg.com/736x/3b/86/c9/3b86c92ca43dd80aee709518d85601b9.jpg" },
+            { id: 65, name: "Fanta Lata", description: "Fanta em lata 350ml", price: 5.00, category: "refrigerantes", image: "https://i.pinimg.com/736x/63/73/14/6373148d09e566b3cc40d80f5947e803.jpg" },
+            { id: 66, name: "Cajuína 1 Litro", description: "Cajuína 1 litro", price: 10.00, category: "refrigerantes", image: "https://i.pinimg.com/736x/f8/e6/ac/f8e6ac0f4e038484d0b79e14d426800c.jpg" },
+            { id: 67, name: "Coca-Cola 1 Litro", description: "Coca-Cola 1 litro", price: 10.00, category: "refrigerantes", image: "https://i.pinimg.com/736x/f7/c2/da/f7c2dacdfda52fd81999e41ce79c67ec.jpg" },
+            { id: 68, name: "Coca-Cola 1 Litro (Zero)", description: "Coca-Cola Zero 1 litro", price: 10.00, category: "refrigerantes", image: "https://i.pinimg.com/736x/fa/0c/69/fa0c69206e24fa47956fdbaaf820b523.jpg" },
+            { id: 69, name: "Fanta 1 Litro", description: "Fanta 1 litro", price: 10.00, category: "refrigerantes", image: "https://i.pinimg.com/736x/43/a5/e0/43a5e054595bee9a2ee05a20f68c281a.jpg" },
+            { id: 70, name: "Coca-Cola 2 Litros", description: "Coca-Cola 2 litros", price: 15.00, category: "refrigerantes", image: "https://i.pinimg.com/1200x/ef/b0/81/efb081a913f9a93c76b475d0302c9c7d.jpg" },
+            { id: 71, name: "Cajuína 2 Litros", description: "Cajuína 2 litros", price: 15.00, category: "refrigerantes", image: "https://i.pinimg.com/736x/19/dd/2a/19dd2a81ec5847bb86a8c4c3280f3a4e.jpg" },
+            { id: 72, name: "Fanta 2 Litros", description: "Fanta 2 litros", price: 15.00, category: "refrigerantes", image: "https://i.pinimg.com/736x/96/2b/fd/962bfd5dea54b132cb51852585329de0.jpg" },
+            
+            // ÁGUA
+            { id: 73, name: "Água Mineral Sem Gás", description: "Água mineral sem gás 500ml", price: 3.00, category: "agua", image: "https://images.unsplash.com/photo-1523362628745-0c100150b504?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" },
+            { id: 74, name: "Água Mineral Com Gás", description: "Água mineral com gás 500ml", price: 4.00, category: "agua", image: "https://images.unsplash.com/photo-1523362628745-0c100150b504?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" }
+        ];
+
+        // Estado do carrinho
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        let currentCategory = 'hamburgueres';
+        let pendingOrderData = null;
+
+        // Elementos DOM
+        const menuGrid = document.getElementById('menuGrid');
+        const cartCount = document.getElementById('cartCount');
+        const cartItems = document.getElementById('cartItems');
+        const cartTotal = document.getElementById('cartTotal');
+        const cartToggle = document.getElementById('cartToggle');
+        const cartSidebar = document.getElementById('cartSidebar');
+        const cartOverlay = document.getElementById('cartOverlay');
+        const closeCart = document.getElementById('closeCart');
+        const whatsappCheckout = document.getElementById('whatsappCheckout');
+        const checkoutModal = document.getElementById('checkoutModal');
+        const closeCheckout = document.getElementById('closeCheckout');
+        const sendWhatsApp = document.getElementById('sendWhatsApp');
+        const emptyCartMessage = document.getElementById('emptyCartMessage');
+        const categoryButtons = document.querySelectorAll('.category-btn');
+        const customerForm = document.getElementById('customerForm');
+        const menuToggle = document.getElementById('menuToggle');
+        const navMenu = document.getElementById('navMenu');
+        const navOverlay = document.getElementById('navOverlay');
+        const navLinks = document.querySelectorAll('.nav-link');
+        
+        // Elementos PIX
+        const pixModal = document.getElementById('pixModal');
+        const pixKeyValue = document.getElementById('pixKeyValue');
+        const copyPixBtnDesktop = document.getElementById('copyPixBtnDesktop');
+        const copyPixBtnMobile = document.getElementById('copyPixBtnMobile');
+        const confirmPixBtn = document.getElementById('confirmPixBtn');
+        const backToCheckoutBtn = document.getElementById('backToCheckoutBtn');
+        
+        // Elementos Localização
+        const locationPhoto = document.getElementById('locationPhoto');
+
+        // Inicialização - CORREÇÃO: Garantir que o carrinho comece fechado
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log('DOM Carregado - Inicializando...');
+            
+            // Garantir que o carrinho e todos os modais comecem fechados
+            cartSidebar.classList.remove('active');
+            cartOverlay.classList.remove('active');
+            checkoutModal.classList.remove('active');
+            pixModal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+            
+            // Garantir que em mobile o carrinho comece com bottom -100%
+            if (window.innerWidth <= 768) {
+                cartSidebar.style.bottom = '-100%';
+            }
+            
+            renderMenuItems();
+            updateCartDisplay();
+            
+            // Event Listeners
+            cartToggle.addEventListener('click', toggleCart);
+            closeCart.addEventListener('click', toggleCart);
+            cartOverlay.addEventListener('click', toggleCart);
+            
+            // Event listener para o botão de checkout
+            whatsappCheckout.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                console.log('Botão de checkout clicado');
+                openCheckoutModal();
+            });
+            
+            closeCheckout.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                closeCheckoutModal();
+            });
+            
+            sendWhatsApp.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                sendOrderViaWhatsApp();
+            });
+            
+            // Event Listeners para o PIX
+            copyPixBtnDesktop.addEventListener('click', copyPixKey);
+            copyPixBtnMobile.addEventListener('click', copyPixKey);
+            confirmPixBtn.addEventListener('click', sendPixOrderViaWhatsApp);
+            backToCheckoutBtn.addEventListener('click', () => {
+                pixModal.classList.remove('active');
+                checkoutModal.classList.add('active');
+            });
+            
+            // Event Listener para a foto da localização
+            locationPhoto.addEventListener('click', openLocationMap);
+            
+            // Filtros de categoria
+            categoryButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    categoryButtons.forEach(btn => btn.classList.remove('active'));
+                    button.classList.add('active');
+                    currentCategory = button.dataset.category;
+                    renderMenuItems();
+                });
+            });
+            
+            // Menu mobile toggle
+            menuToggle.addEventListener('click', toggleMobileMenu);
+            navOverlay.addEventListener('click', toggleMobileMenu);
+            
+            // Fechar menu ao clicar em um link
+            navLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const targetId = link.getAttribute('href');
+                    
+                    if (window.innerWidth <= 768) {
+                        toggleMobileMenu();
+                    }
+                    
+                    // Atualizar link ativo
+                    navLinks.forEach(l => l.classList.remove('active'));
+                    link.classList.add('active');
+                    
+                    // Scroll suave para a seção
+                    if (targetId && targetId !== '#') {
+                        const targetElement = document.querySelector(targetId);
+                        if (targetElement) {
+                            window.scrollTo({
+                                top: targetElement.offsetTop - 80,
+                                behavior: 'smooth'
+                            });
+                        }
+                    }
+                });
+            });
+            
+            // Fechar menu ao redimensionar para desktop
+            window.addEventListener('resize', () => {
+                if (window.innerWidth > 768) {
+                    navMenu.classList.remove('active');
+                    navOverlay.classList.remove('active');
+                    document.body.style.overflow = 'auto';
+                }
+            });
+            
+            // Event listener para fechar modais ao clicar no overlay
+            checkoutModal.addEventListener('click', function(e) {
+                if (e.target === checkoutModal) {
+                    closeCheckoutModal();
+                }
+            });
+            
+            pixModal.addEventListener('click', function(e) {
+                if (e.target === pixModal) {
+                    pixModal.classList.remove('active');
+                    setTimeout(() => {
+                        checkoutModal.classList.add('active');
+                    }, 300);
+                }
+            });
+            
+            console.log('Inicialização completa');
+        });
+
+        // Função para abrir a localização no Google Maps
+        function openLocationMap() {
+            const address = "Rua Carlos Cornélio, Centro";
+            const encodedAddress = encodeURIComponent(address);
+            const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodedAddress}`;
+            
+            window.open(googleMapsUrl, '_blank');
+        }
+
+        // Alternar menu mobile
+        function toggleMobileMenu() {
+            const isActive = navMenu.classList.contains('active');
+            navMenu.classList.toggle('active');
+            navOverlay.classList.toggle('active');
+            document.body.style.overflow = isActive ? 'auto' : 'hidden';
+            
+            // Mudar ícone do botão
+            const icon = menuToggle.querySelector('i');
+            icon.classList.toggle('fa-bars');
+            icon.classList.toggle('fa-times');
+        }
+
+        // Renderiza os itens do menu
+        function renderMenuItems() {
+            menuGrid.innerHTML = '';
+            
+            const filteredItems = menuItems.filter(item => item.category === currentCategory);
+            
+            if (filteredItems.length === 0) {
+                menuGrid.innerHTML = '<p style="text-align: center; width: 100%; padding: 40px 20px; color: #666;">Nenhum item nesta categoria.</p>';
+                return;
+            }
+            
+            filteredItems.forEach(item => {
+                const menuItemElement = document.createElement('div');
+                menuItemElement.className = 'menu-item';
+                menuItemElement.dataset.id = item.id;
+                menuItemElement.dataset.category = item.category;
+                
+                menuItemElement.innerHTML = `
+                    <div class="item-image">
+                        <img src="${item.image}" alt="${item.name}" loading="lazy">
+                    </div>
+                    <div class="item-info">
+                        <h3>${item.name}</h3>
+                        <p>${item.description}</p>
+                        <div class="item-footer">
+                            <span class="price">R$ ${item.price.toFixed(2)}</span>
+                            <button class="add-to-cart" data-id="${item.id}">
+                                Pedir
+                            </button>
+                        </div>
+                    </div>
+                `;
+                
+                menuGrid.appendChild(menuItemElement);
+            });
+            
+            // Adiciona event listeners aos botões "Adicionar ao Carrinho"
+            document.querySelectorAll('.add-to-cart').forEach(button => {
+                button.addEventListener('click', (e) => {
+                    const itemId = parseInt(e.currentTarget.dataset.id);
+                    addToCart(itemId);
+                });
+            });
+        }
+
+        // Adiciona item ao carrinho
+        function addToCart(itemId) {
+            const item = menuItems.find(i => i.id === itemId);
+            const existingItem = cart.find(i => i.id === itemId);
+            
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cart.push({
+                    ...item,
+                    quantity: 1
+                });
+            }
+            
+            updateCartDisplay();
+            saveCartToLocalStorage();
+            
+            // Feedback visual
+            const button = document.querySelector(`.add-to-cart[data-id="${itemId}"]`);
+            const originalText = button.innerHTML;
+            button.innerHTML = '✓ Adicionado!';
+            button.style.backgroundColor = 'var(--success)';
+            
+            setTimeout(() => {
+                button.innerHTML = originalText;
+                button.style.backgroundColor = 'var(--primary)';
+            }, 1500);
+        }
+
+        // Remove item do carrinho
+        function removeFromCart(itemId) {
+            cart = cart.filter(item => item.id !== itemId);
+            updateCartDisplay();
+            saveCartToLocalStorage();
+        }
+
+        // Atualiza quantidade de item no carrinho
+        function updateQuantity(itemId, newQuantity) {
+            if (newQuantity < 1) {
+                removeFromCart(itemId);
+                return;
+            }
+            
+            const item = cart.find(i => i.id === itemId);
+            if (item) {
+                item.quantity = newQuantity;
+            }
+            
+            updateCartDisplay();
+            saveCartToLocalStorage();
+        }
+
+        // Atualiza exibição do carrinho
+        function updateCartDisplay() {
+            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+            cartCount.textContent = totalItems;
+            
+            cartItems.innerHTML = '';
+            
+            if (cart.length === 0) {
+                emptyCartMessage.style.display = 'block';
+                cartTotal.textContent = 'R$ 0,00';
+                return;
+            }
+            
+            emptyCartMessage.style.display = 'none';
+            
+            cart.forEach(item => {
+                const cartItemElement = document.createElement('div');
+                cartItemElement.className = 'cart-item';
+                
+                cartItemElement.innerHTML = `
+                    <div class="cart-item-image">
+                        <img src="${item.image}" alt="${item.name}" loading="lazy">
+                    </div>
+                    <div class="cart-item-info">
+                        <h4>${item.name}</h4>
+                        <p>R$ ${item.price.toFixed(2)}</p>
+                    </div>
+                    <div class="cart-item-controls">
+                        <button class="quantity-btn decrease" data-id="${item.id}">
+                            <i class="fas fa-minus"></i>
+                        </button>
+                        <span class="item-quantity">${item.quantity}</span>
+                        <button class="quantity-btn increase" data-id="${item.id}">
+                            <i class="fas fa-plus"></i>
+                        </button>
+                        <button class="remove-item" data-id="${item.id}">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                `;
+                
+                cartItems.appendChild(cartItemElement);
+            });
+            
+            // Adicionar event listeners aos controles
+            document.querySelectorAll('.decrease').forEach(button => {
+                button.addEventListener('click', (e) => {
+                    const itemId = parseInt(e.currentTarget.dataset.id);
+                    const item = cart.find(i => i.id === itemId);
+                    updateQuantity(itemId, item.quantity - 1);
+                });
+            });
+            
+            document.querySelectorAll('.increase').forEach(button => {
+                button.addEventListener('click', (e) => {
+                    const itemId = parseInt(e.currentTarget.dataset.id);
+                    const item = cart.find(i => i.id === itemId);
+                    updateQuantity(itemId, item.quantity + 1);
+                });
+            });
+            
+            document.querySelectorAll('.remove-item').forEach(button => {
+                button.addEventListener('click', (e) => {
+                    const itemId = parseInt(e.currentTarget.dataset.id);
+                    removeFromCart(itemId);
+                });
+            });
+            
+            const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            cartTotal.textContent = `R$ ${total.toFixed(2)}`;
+            
+            // Verificar se há scroll no carrinho em mobile
+            if (window.innerWidth <= 768) {
+                checkCartScroll();
+            }
+        }
+
+        // Verificar se há scroll no carrinho
+        function checkCartScroll() {
+            const cartItemsContainer = document.querySelector('.cart-items');
+            if (cartItemsContainer.scrollHeight > cartItemsContainer.clientHeight) {
+                cartItemsContainer.classList.add('has-scroll');
+            } else {
+                cartItemsContainer.classList.remove('has-scroll');
+            }
+        }
+
+        // Alterna visibilidade do carrinho - CORRIGIDO
+        function toggleCart() {
+            const isActive = cartSidebar.classList.contains('active');
+            
+            if (window.innerWidth <= 768) {
+                // Em mobile, usa animação de baixo para cima
+                if (isActive) {
+                    cartSidebar.style.bottom = '-100%';
+                    setTimeout(() => {
+                        cartSidebar.classList.remove('active');
+                        cartOverlay.classList.remove('active');
+                        document.body.style.overflow = 'auto';
+                    }, 300);
+                } else {
+                    cartSidebar.classList.add('active');
+                    cartOverlay.classList.add('active');
+                    cartSidebar.style.bottom = '0';
+                    document.body.style.overflow = 'hidden';
+                    setTimeout(checkCartScroll, 100);
+                }
+            } else {
+                // Em desktop, usa animação padrão
+                cartSidebar.classList.toggle('active');
+                cartOverlay.classList.toggle('active');
+                document.body.style.overflow = isActive ? 'auto' : 'hidden';
+            }
+        }
+
+        // Abre o modal de checkout
+        function openCheckoutModal() {
+            console.log('Abrindo modal de checkout...');
+            
+            if (cart.length === 0) {
+                alert('Seu carrinho está vazio! Adicione itens antes de finalizar.');
+                return;
+            }
+            
+            // Fechar carrinho se estiver aberto
+            if (cartSidebar.classList.contains('active')) {
+                toggleCart();
+            }
+            
+            // Garantir que o modal seja exibido
+            checkoutModal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+            
+            // Resetar formulário
+            customerForm.reset();
+            document.getElementById('paymentCash').checked = true;
+            pendingOrderData = null;
+            
+            // Focar no primeiro campo
+            setTimeout(() => {
+                const nameField = document.getElementById('customerName');
+                if (nameField) {
+                    nameField.focus();
+                }
+            }, 300);
+            
+            console.log('Modal de checkout aberto');
+        }
+
+        // Fecha o modal de checkout
+        function closeCheckoutModal() {
+            console.log('Fechando modal de checkout...');
+            checkoutModal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+            pendingOrderData = null;
+        }
+
+        // Envia pedido via WhatsApp
+        function sendOrderViaWhatsApp() {
+            console.log('Enviando pedido via WhatsApp...');
+            
+            // Validar formulário
+            const customerName = document.getElementById('customerName').value.trim();
+            const customerPhone = document.getElementById('customerPhone').value.trim();
+            const customerAddress = document.getElementById('customerAddress').value.trim();
+            const paymentMethod = document.querySelector('input[name="paymentMethod"]:checked').value;
+            
+            if (!customerName || !customerPhone || !customerAddress) {
+                alert('Por favor, preencha todos os campos obrigatórios (*)');
+                return;
+            }
+            
+            const changeFor = document.getElementById('changeFor').value.trim();
+            const customerNotes = document.getElementById('customerNotes').value.trim();
+            
+            pendingOrderData = {
+                customerName,
+                customerPhone,
+                customerAddress,
+                paymentMethod,
+                changeFor,
+                customerNotes
+            };
+            
+            // Se o pagamento for PIX, mostrar modal de chave PIX
+            if (pendingOrderData.paymentMethod === 'PIX') {
+                checkoutModal.classList.remove('active');
+                pixModal.classList.add('active');
+                return;
+            }
+            
+            // Se não for PIX, enviar direto
+            sendFinalOrder(pendingOrderData);
+        }
+
+        // Função para copiar chave PIX
+        function copyPixKey() {
+            const pixKey = pixKeyValue.textContent;
+            
+            navigator.clipboard.writeText(pixKey).then(() => {
+                // Atualizar ambos os botões
+                copyPixBtnDesktop.innerHTML = '<i class="fas fa-check"></i> Chave Copiada!';
+                copyPixBtnDesktop.classList.add('copied');
+                copyPixBtnMobile.innerHTML = '<i class="fas fa-check"></i> Chave Copiada!';
+                copyPixBtnMobile.classList.add('copied');
+                
+                setTimeout(() => {
+                    copyPixBtnDesktop.innerHTML = '<i class="far fa-copy"></i> Copiar Chave PIX';
+                    copyPixBtnDesktop.classList.remove('copied');
+                    copyPixBtnMobile.innerHTML = '<i class="far fa-copy"></i> Copiar Chave PIX';
+                    copyPixBtnMobile.classList.remove('copied');
+                }, 2000);
+            }).catch(err => {
+                console.error('Erro ao copiar: ', err);
+                // Fallback para navegadores mais antigos
+                const textArea = document.createElement('textarea');
+                textArea.value = pixKey;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+                
+                copyPixBtnDesktop.innerHTML = '<i class="fas fa-check"></i> Chave Copiada!';
+                copyPixBtnDesktop.classList.add('copied');
+                copyPixBtnMobile.innerHTML = '<i class="fas fa-check"></i> Chave Copiada!';
+                copyPixBtnMobile.classList.add('copied');
+                
+                setTimeout(() => {
+                    copyPixBtnDesktop.innerHTML = '<i class="far fa-copy"></i> Copiar Chave PIX';
+                    copyPixBtnDesktop.classList.remove('copied');
+                    copyPixBtnMobile.innerHTML = '<i class="far fa-copy"></i> Copiar Chave PIX';
+                    copyPixBtnMobile.classList.remove('copied');
+                }, 2000);
+            });
+        }
+
+        // Função para enviar pedido PIX via WhatsApp
+        function sendPixOrderViaWhatsApp() {
+            if (!pendingOrderData) {
+                alert('Erro: Dados do pedido não encontrados. Por favor, preencha o formulário novamente.');
+                return;
+            }
+            
+            const { customerName, customerPhone, customerAddress, paymentMethod, changeFor, customerNotes } = pendingOrderData;
+            
+            // Usar o telefone do rodapé
+            let phoneNumber = '5587981193590';
+            
+            let message = `*PEDIDO LA CASA BURGER - PAGAMENTO PIX*\n\n`;
+            message += `*Dados do Cliente:*\n`;
+            message += `Nome: ${customerName}\n`;
+            message += `Telefone: ${customerPhone}\n`;
+            message += `Endereço: ${customerAddress}\n\n`;
+            
+            message += `*Itens do Pedido:*\n`;
+            cart.forEach((item, index) => {
+                message += `${index + 1}. ${item.name} x${item.quantity} - R$ ${(item.price * item.quantity).toFixed(2)}\n`;
+            });
+            
+            const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            message += `\n*Total: R$ ${total.toFixed(2)}*\n\n`;
+            
+            message += `*Informações de Pagamento:*\n`;
+            message += `Forma de pagamento: ${paymentMethod}\n`;
+            message += `Chave PIX: ${pixKeyValue.textContent}\n`;
+            message += `\n*Pagamento via PIX realizado!*\n`;
+            
+            if (customerNotes) {
+                message += `\n*Observações:*\n${customerNotes}\n`;
+            }
+            
+            message += `\n---\n`;
+            message += `*INSTRUÇÕES:*\n`;
+            message += `1. Pedido será enviado após confirmação do pagamento\n`;
+            message += `2. Envie o comprovante neste chat\n`;
+            message += `3. Tempo de preparo: 30-40 minutos\n`;
+            
+            const encodedMessage = encodeURIComponent(message);
+            const whatsappURL = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
+            
+            window.open(whatsappURL, '_blank');
+            
+            // Limpar carrinho e dados
+            cart = [];
+            updateCartDisplay();
+            saveCartToLocalStorage();
+            
+            // Fechar modais
+            pixModal.classList.remove('active');
+            checkoutModal.classList.remove('active');
+            customerForm.reset();
+            document.getElementById('paymentCash').checked = true;
+            pendingOrderData = null;
+            
+            // Feedback ao usuário
+            setTimeout(() => {
+                alert('Pedido enviado! Agora faça o pagamento PIX e envie o comprovante no WhatsApp.');
+            }, 500);
+        }
+
+        // Função para enviar pedido (não PIX)
+        function sendFinalOrder(orderData) {
+            const { customerName, customerPhone, customerAddress, paymentMethod, changeFor, customerNotes } = orderData;
+            
+            // Usar o telefone do rodapé
+            let phoneNumber = '5587981193590';
+            
+            let message = `*PEDIDO LA CASA BURGER*\n\n`;
+            message += `*Dados do Cliente:*\n`;
+            message += `Nome: ${customerName}\n`;
+            message += `Telefone: ${customerPhone}\n`;
+            message += `Endereço: ${customerAddress}\n\n`;
+            
+            message += `*Itens do Pedido:*\n`;
+            cart.forEach((item, index) => {
+                message += `${index + 1}. ${item.name} x${item.quantity} - R$ ${(item.price * item.quantity).toFixed(2)}\n`;
+            });
+            
+            const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            message += `\n*Total: R$ ${total.toFixed(2)}*\n\n`;
+            
+            message += `*Informações de Pagamento:*\n`;
+            message += `Forma de pagamento: ${paymentMethod}\n`;
+            if (changeFor && paymentMethod === 'Dinheiro') {
+                message += `Troco para: ${changeFor}\n`;
+            }
+            
+            if (customerNotes) {
+                message += `\n*Observações:*\n${customerNotes}\n`;
+            }
+            
+            message += `\n*Obrigado pelo pedido!*`;
+            
+            const encodedMessage = encodeURIComponent(message);
+            const whatsappURL = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
+            
+            window.open(whatsappURL, '_blank');
+            
+            cart = [];
+            updateCartDisplay();
+            saveCartToLocalStorage();
+            
+            closeCheckoutModal();
+            
+            customerForm.reset();
+            document.getElementById('paymentCash').checked = true;
+            pendingOrderData = null;
+        }
+
+        // Salva carrinho no localStorage
+        function saveCartToLocalStorage() {
+            localStorage.setItem('cart', JSON.stringify(cart));
+        }
+    </script>
+</body>
+</html>
