@@ -2463,9 +2463,9 @@
                 return;
             }
             let discount = null;
-            if (code === '') discount = { code, type: 'percent', discountValue: 10 };
-            else if (code === '') discount = { code, type: 'fixed', discountValue: 5 };
-            else if (code === '') discount = { code, type: 'percent', discountValue: 5 };
+            if (code === '') discount = { code, type: 'percent', discountValue: 0 };
+            else if (code === '') discount = { code, type: 'fixed', discountValue: 0};
+            else if (code === '') discount = { code, type: 'percent', discountValue: 0};
             else {
                 couponMessage.innerHTML = '<span style="color:red;">Cupom inválido</span>';
                 return;
